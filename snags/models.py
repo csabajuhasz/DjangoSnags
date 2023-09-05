@@ -4,14 +4,14 @@ from django.utils import timezone
 
 # Create your models here.
 class Snag(models.Model):
-    status_open = "O"
-    status_closed = "C"
-    status_delivery = "D"
+    status_open = "Open"
+    status_closed = "Close"
+    status_delivery = "Waiting for Parts"
 
     status_choices = [
         (status_open, "Open"),
         (status_closed, "Closed"),
-        (status_delivery, "Waiting for delivery"),
+        (status_delivery, "Waiting for Parts"),
     ]
     address = models.CharField(max_length=200)
     post_code = models.CharField(max_length=200)
@@ -24,7 +24,10 @@ class Snag(models.Model):
     snag_details = models.TextField()
     notes = models.TextField()
     booked_date = models.DateField(null=True)
-    status = models.CharField(max_length=1, choices=status_choices, default=status_open)
+    status = models.CharField(
+        max_length=20, choices=status_choices, default=status_open
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Snag: {self.address} {self.plot_number}"
