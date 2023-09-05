@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <strong>
+      {{ customer_snag.first_name }} {{ customer_snag.last_name }}</strong
+    >
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <strong>Address: </strong>{{ customer_snag.address }}
+    </p>
+
+    <p class="card-text">
+      <strong>Post Code :</strong>{{ customer_snag.post_code }}
+    </p>
+
+    <p class="card-text">
+      <strong>Plot Nr :</strong>{{ customer_snag.plot_number }}
+    </p>
+
+    <p class="card-text">
+      <strong>Phone Nr: </strong>{{ customer_snag.phone_number }}
+    </p>
+
+    <p class="card-text"><strong>Email: </strong>{{ customer_snag.email }}</p>
+
+    <p class="card-text">
+      <strong>Details :</strong>{{ customer_snag.snag_details}}
+    </p>
+
+    <p class="card-text"><strong>Notes :</strong>{{ customer_snag.notes }}</p>
+
+    <p class="card-text">
+      <strong>Booked Date: </strong>{{ customer_snag.booked_date}}
+    </p>
+
+    <p class="card-text"><strong>Status :</strong>{{ customer_snag.status}}</p>
+
+    <p class="card-text">
+      <strong>Created at :</strong>{{ customer_snag.created_at }}
+    </p>
+  </div>
+</div>
+
+{% endblock %}
