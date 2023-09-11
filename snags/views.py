@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Snag
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm, AddSnagForm
 
 # Create your views here.
 
@@ -59,4 +59,44 @@ def customer_snag(request, pk):
         return render(request, "customer.html", {"customer_snag": customer_snag})
     else:
         messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect("home")
+
+
+def delete_snag(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Snag.objects.get(id=pk)
+        delete_it.delete()
+        messages.success(request, "You have deleted  succesfully")
+        return redirect("home")
+
+    else:
+        messages.success(request, "You have to log in ")
+        return redirect("home")
+
+
+def add_snag(request):
+    form = AddSnagForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                add_snag = form.save()
+                messages.success(request, "Snag Added...")
+                return redirect("home")
+        return render(request, "add_snag.html", {"form": form})
+    else:
+        messages.success(request, "You Must Be Logged In...")
+        return redirect("home")
+
+
+def update_snag(request, pk):
+    if request.user.is_authenticated:
+        current_snag = Snag.objects.get(id=pk)
+        form = AddSnagForm(request.POST or None, instance=current_snag)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your Changes has been Updated...")
+            return redirect("home")
+        return render(request, "update_snag.html", {"form": form})
+    else:
+        messages.success(request, "You Must Be Logged In...")
         return redirect("home")

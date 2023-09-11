@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Snag
 
 # from .models import Record
 
@@ -61,3 +62,93 @@ class SignUpForm(UserCreationForm):
         self.fields[
             "password2"
         ].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+
+
+# Create form for ass snags
+class AddSnagForm(forms.ModelForm):
+    address = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Address", "class": "form-control"}
+        ),
+        label="",
+    )
+    post_code = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Post Code", "class": "form-control"}
+        ),
+        label="",
+    )
+    plot_number = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Plot Number", "class": "form-control"}
+        ),
+        label="",
+    )
+    ref_number = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Ref. Number", "class": "form-control"}
+        ),
+        label="",
+    )
+    first_name = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "First Name", "class": "form-control"}
+        ),
+        label="",
+    )
+    last_name = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Last Name", "class": "form-control"}
+        ),
+        label="",
+    )
+    phone_number = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Phone Nr.", "class": "form-control"}
+        ),
+        label="",
+    )
+    email = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Email", "class": "form-control"}
+        ),
+        label="",
+    )
+    snag_details = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Details", "class": "form-control"}
+        ),
+        label="",
+    )
+
+    notes = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "Notes", "class": "form-control"}
+        ),
+        label="",
+    )
+
+    booked_date = forms.DateField(
+        required=True,
+        widget=forms.widgets.DateInput(
+            attrs={
+                "placeholder": "Year -Month -Day",
+                "class": "form-control",
+            }
+        ),
+        label="Booking Date",
+    )
+
+    class Meta:
+        model = Snag
+        exclude = ("user",)

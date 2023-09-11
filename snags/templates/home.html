@@ -4,8 +4,6 @@
   <thead class="table-secondary">
     <tr>
       <th scope="col">Address</th>
-      <th scope="col">Post code</th>
-      <th scope="col">Plot number</th>
 
       <th scope="col">Name</th>
 
@@ -20,8 +18,6 @@
     {% if snags %} {%for snag in snags%}
     <tr>
       <td><a href="{% url 'customer' snag.id %}">{{ snag.address }}</a></td>
-      <td>{{snag.post_code}}</td>
-      <td>{{snag.plot_number}}</td>
 
       <td>{{snag.first_name}} {{snag.last_name}}</td>
       <td>{{snag.phone_number}}</td>
