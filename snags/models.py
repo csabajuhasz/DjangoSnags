@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your models here.
 class Snag(models.Model):
     status_open = "Open"
-    status_closed = "Close"
+    status_closed = "Closed"
     status_delivery = "Waiting for Parts"
 
     status_choices = [
@@ -13,6 +13,16 @@ class Snag(models.Model):
         (status_closed, "Closed"),
         (status_delivery, "Waiting for Parts"),
     ]
+
+    am_pm_am = "AM"
+    am_pm_pm = "PM"
+
+    am_pm_choices = [
+        (am_pm_am, "AM"),
+        (am_pm_pm, "PM"),
+    ]
+
+    site = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     post_code = models.CharField(max_length=200)
     plot_number = models.PositiveIntegerField()
@@ -24,10 +34,11 @@ class Snag(models.Model):
     snag_details = models.TextField()
     notes = models.TextField()
     booked_date = models.DateField(null=True)
+    am_pm = models.CharField(max_length=2, choices=am_pm_choices, default=am_pm_am)
     status = models.CharField(
         max_length=20, choices=status_choices, default=status_open
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Snag: {self.address} {self.plot_number}"
+        return f"Snag: {self.address} "

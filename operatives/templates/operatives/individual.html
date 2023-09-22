@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <strong> {{ operatives.first_name }} {{ operatives.last_name }}</strong>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>Address: </strong>{{ individuals.address }}</p>
+    <p class="card-text">
+      <strong>Post Code: </strong>{{ individuals.post_code }}
+    </p>
+
+    <p class="card-text">
+      <strong>Phone Number :</strong>{{ individuals.phone_number }}
+    </p>
+
+    <p class="card-text"><strong>Email :</strong>{{ individuals.email }}</p>
+
+    <p class="card-text"><strong>Trade: </strong>{{ individuals.trade }}</p>
+
+    <p class="card-text"><strong>Cards :</strong>{{ individuals.card}}</p>
+
+    <p class="card-text">
+      <strong>Driving License :</strong>{{ individuals.driving_license }}
+    </p>
+
+    <p class="card-text"><strong>Wage :</strong>{{ individuals.wage}}</p>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{%extends 'base.html'%} {%block content%} {%if user.is_authenticated %}
+
+<br />
+
+<table class="table table-hover table-bordered table-secondary table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if jobs %} {%for job in jobs%}
+
+    <tr>
+      <td>{{job.operatives__first_name}}</td>
+      <td>{{job.location}}</td>
+      <td>{{job.description}}</td>
+      <td>{{job.job_date }}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+{% endif %} {%else%}
+<div class="col-md-6 offset-md-3">
+  <h1>Login</h1>
+  <br />
+
+  <form method="POST" action="{% url 'snags/home' %}">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        ,
+        placeholder="Username"
+        required
+      />
+    </div>
+    <br />
+    <div class="mb-3">
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        ,
+        placeholder="Password"
+        required
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+
+  {% endif %} {% endblock %}
+</div>
+
+<ul>
+  {%for job in jobs%}
+  <li>{{job.location}} - {{job.description}}-</li>
+  <p>{{job.operatives.get}}</p>
+  <br />
+</ul>
+
+{%endfor%}

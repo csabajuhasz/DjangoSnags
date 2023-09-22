@@ -1,0 +1,9 @@
+{%extends 'base.html'%} {%block content%} {% if searched %}
+<h1>You are looking for {{ searched }}</h1>
+<br />
+{%for job in jobs%} {{job}}
+<br />
+{%endfor%} {% else %}
+<h1>Hey You Forgot to Search</h1>
+
+{% endif %} {% endblock %}

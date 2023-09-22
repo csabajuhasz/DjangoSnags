@@ -1,0 +1,61 @@
+{%extends 'base.html'%} {%block content%} {%if user.is_authenticated %}
+
+<table class="table table-hover table-bordered table-secondary table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if operatives %} {%for operative in operatives%}
+
+    <tr>
+      <td>
+        <a href="{% url 'operatives/individual' operative.id %}"
+          >{{operative.first_name}}
+        </a>
+      </td>
+      <td>{{operative.last_name}}</td>
+      <td>{{operative.operative_created_at}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+{% endif %} {%else%}
+<div class="col-md-6 offset-md-3">
+  <h1>Login</h1>
+  <br />
+
+  <form method="POST" action="{% url 'snags/home' %}">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        ,
+        placeholder="Username"
+        required
+      />
+    </div>
+    <br />
+    <div class="mb-3">
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        ,
+        placeholder="Password"
+        required
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+
+  {% endif %} {% endblock %}
+</div>

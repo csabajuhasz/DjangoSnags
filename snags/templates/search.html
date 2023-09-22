@@ -1,0 +1,10 @@
+{%extends 'base.html'%} {%block content%} {%if searched%}
+<h1>You searched for {{searched}}</h1>
+<br />
+
+{%for snag in snags%}
+<a href="{% url 'snags/customer' snag.id %}"> {{snag}} </a><br />
+{%endfor%} {%else%}
+<h1>Hey you forgot to search ....</h1>
+
+{% endif %} {% endblock %}
