@@ -42,7 +42,7 @@ def job(request):
     details = (
         Job.objects.values(
             "location", "description", "job_date", "operatives__first_name"
-        ).order_by("job_date")
+        ).order_by("job_date", "location")
         # Job.objects.prefetch_related("operatives")
         # .order_by("job_date", "operatives")
         # .all()

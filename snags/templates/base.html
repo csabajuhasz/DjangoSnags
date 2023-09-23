@@ -11,6 +11,10 @@
       crossorigin="anonymous"
     />
   </head>
+
+  {%load static%}
+  <link rel="stylesheet" href=" {%static 'style.css'%} " />
+
   <body>
     {% include 'navbar.html'%}
     <div class="container">
