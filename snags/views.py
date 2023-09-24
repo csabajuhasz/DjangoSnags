@@ -13,7 +13,12 @@ def core(request):
 
 
 def index(request):
-    snags = Snag.objects.all().order_by("-status", "site", "booked_date")
+    snags = Snag.objects.all().order_by(
+        "-status",
+        "booked_date",
+        "am_pm",
+        "site",
+    )
 
     # Check to see if logged in
     if request.method == "POST":
