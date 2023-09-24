@@ -67,7 +67,7 @@ class SignUpForm(UserCreationForm):
 # Create form for ass snags
 class AddSnagForm(forms.ModelForm):
     site = forms.CharField(
-        required=True,
+        required=False,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Site", "class": "form-control"}
         ),
@@ -139,7 +139,7 @@ class AddSnagForm(forms.ModelForm):
     )
 
     notes = forms.CharField(
-        required=True,
+        required=False,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Notes", "class": "form-control"}
         ),
