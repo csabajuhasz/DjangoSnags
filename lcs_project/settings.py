@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "snags",
     "operatives",
     "debug_toolbar",
+    "store",
 ]
 
 MIDDLEWARE = [

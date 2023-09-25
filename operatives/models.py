@@ -15,10 +15,10 @@ class Operative(models.Model):
 
 
 class Detail(models.Model):
-    address = models.CharField(max_length=200)
-    post_code = models.CharField(blank=True, max_length=200)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    post_code = models.CharField(blank=True, max_length=200, null=True)
     phone_number = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
+    email = models.EmailField(max_length=200, null=True, blank=True)
     trade = models.CharField(max_length=200)
     card = models.CharField(max_length=200)
     driving_license = models.CharField(max_length=200)
@@ -35,7 +35,7 @@ class Job(models.Model):
     operatives = models.ManyToManyField(Operative)
     description = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
-    post_code = models.CharField(blank=True, max_length=200)
+    post_code = models.CharField(blank=True, max_length=200, null=True)
     job_created_at = models.DateTimeField(auto_now_add=True)
     job_date = models.DateField(null=True)
 
