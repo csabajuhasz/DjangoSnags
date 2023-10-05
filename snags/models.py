@@ -16,10 +16,12 @@ class Snag(models.Model):
 
     am_pm_am = "AM"
     am_pm_pm = "PM"
+    am_pm_pm = "Any time"
 
     am_pm_choices = [
         (am_pm_am, "AM"),
         (am_pm_pm, "PM"),
+        (am_pm_pm, "Any time"),
     ]
 
     site = models.CharField(max_length=200, null=True, blank=True)
@@ -34,7 +36,7 @@ class Snag(models.Model):
     snag_details = models.TextField(null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     booked_date = models.DateField(null=True)
-    am_pm = models.CharField(max_length=2, choices=am_pm_choices, default=am_pm_am)
+    am_pm = models.CharField(max_length=10, choices=am_pm_choices, default=am_pm_am)
     status = models.CharField(
         max_length=20, choices=status_choices, default=status_open
     )
