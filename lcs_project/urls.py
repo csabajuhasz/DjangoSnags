@@ -20,5 +20,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("snags.urls")),
     path("operatives/", include("operatives.urls")),
+    path("store/", include("store.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

@@ -11,12 +11,14 @@ class CollectionAdmin(admin.ModelAdmin):
     list_display = ["title", "update"]
     list_per_page = 10
     inlines = [MaterialInline]
+    search_fields = ["title__istartswith"]
 
 
 @admin.register(models.Site)
 class SiteAdmin(admin.ModelAdmin):
     list_display = ["title", "update"]
     list_per_page = 10
+    search_fields = ["title__istartswith"]
 
 
 @admin.register(models.Material)
@@ -25,4 +27,4 @@ class Materialdmin(admin.ModelAdmin):
     list_per_page = 10
     list_filter = ["site", "collection"]
     list_editable = ["inventory"]
-    search_fields = ["title"]
+    search_fields = ["title__istartswith"]

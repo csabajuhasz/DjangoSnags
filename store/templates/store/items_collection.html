@@ -1,0 +1,27 @@
+{%extends 'base.html'%} {%block content%} {%if user.is_authenticated %}
+
+<table class="table table-hover table-bordered table-secondary table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Inventory</th>
+      <th scope="col">Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if collections %} {%for collection in collections%}
+    <tr>
+      <td>
+        <a href="{% url 'store/update_material' collection.id %}"
+          >{{ collection.title }}</a
+        >
+      </td>
+      <td>{{collection.inventory}}</td>
+      <td>{{collection.update }}</td>
+    </tr>
+
+    {%endfor%}
+  </tbody>
+</table>
+
+{% endif %} {%else%} {% endif %} {% endblock %}
