@@ -1,9 +1,28 @@
 {%extends 'base.html'%} {%block content%} {% if searched %}
-<h1>You are looking for {{ searched }}</h1>
-<br />
-{%for job in jobs%} {{job}}
-<br />
-{%endfor%} {% else %}
-<h1>Hey You Forgot to Search</h1>
+<h1>Details for {{ searched }} :</h1>
 
+<br />
+<table class="table table-hover table-bordered table-secondary table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">Location</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if jobs %} {%for job in jobs%}
+
+    <tr>
+      <td>{{job}}</td>
+      <td>{{job.description}}</td>
+      <td>{{job.job_date}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+<br />
+
+{% endif %}{% else %}
+<h1>Hey You Forgot to Search</h1>
 {% endif %} {% endblock %}

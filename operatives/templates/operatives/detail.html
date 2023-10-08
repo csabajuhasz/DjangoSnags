@@ -1,5 +1,26 @@
 {%extends 'base.html'%} {%block content%} {%if user.is_authenticated %}
 
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <form
+      class="d-flex"
+      method="POST"
+      action="{%url 'operatives/search_job'%}"
+      role="search"
+    >
+      {% csrf_token %}
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search by name"
+        aria-label="Search"
+        name="searched"
+      />
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
 <br />
 
 <table class="table table-hover table-bordered table-secondary table-striped">

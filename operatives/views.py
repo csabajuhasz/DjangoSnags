@@ -52,3 +52,22 @@ def job(request):
         "operatives/detail.html",
         {"jobs": list(details), "operatives": operatives},
     )
+
+
+def search_job(request):
+    if request.method == "POST":
+        searched = request.POST["searched"]
+        # snags = Snag.objects.filter(address__icontains=searched)
+
+        jobs = Job.objects.filter(
+            Q(operatives__first_name__icontains=searched)
+            | Q(operatives__last_name__icontains=searched)
+        )
+
+        return render(
+            request,
+            "operatives/search_job.html",
+            {"searched": searched, "jobs": jobs},
+        )
+    else:
+        return render(request, "search.html", {})

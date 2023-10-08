@@ -10,5 +10,5 @@ urlpatterns = [
         name="operatives/individual",
     ),
     path("operatives/", views.job, name="operatives/detail"),
-    # path("search_job", views.search_job, name="operatives/search_job"),
+    path("search_job", views.search_job, name="operatives/search_job"),
 ]
