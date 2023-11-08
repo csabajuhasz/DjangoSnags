@@ -1,6 +1,7 @@
-{%extends 'base.html'%} {%block content%} {%if user.is_authenticated %}
+{%extends 'base.html'%} {%block content%}
 
 <nav class="navbar bg-body-tertiary">
+  {%if user.is_authenticated and user.is_staff %}
   <div class="container-fluid">
     <form
       class="d-flex"

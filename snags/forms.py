@@ -96,7 +96,7 @@ class AddSnagForm(forms.ModelForm):
         label="",
     )
     ref_number = forms.CharField(
-        required=True,
+        required=False,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Ref. Number", "class": "form-control"}
         ),

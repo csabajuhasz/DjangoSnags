@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="card text-bg-secondary border-danger">
+  {%if user.is_authenticated and user.is_staff %}
   <div class="card-header border-danger">
     <strong> {{ operatives.first_name }} {{ operatives.last_name }}</strong>
   </div>
@@ -27,5 +28,4 @@
     <p class="card-text"><strong>Wage :</strong>{{ individuals.wage}}</p>
   </div>
 </div>
-
-{% endblock %}
+{%endif%} {% endblock %}

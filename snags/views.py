@@ -93,6 +93,14 @@ def add_snag(request):
                 messages.success(request, "Snag Added...")
                 return redirect("snags/home")
         return render(request, "snags/add_snag.html", {"form": form})
+
+    elif request.method == "POST":
+        if form.is_valid():
+            add_snag = form.save()
+            messages.success(request, "Snag Added...")
+            return redirect("snags/home")
+        return render(request, "snags/add_snag.html", {"form": form})
+
     else:
         messages.success(request, "You Must Be Logged In...")
         return redirect("snags/home")

@@ -1,6 +1,6 @@
-{%extends 'base.html'%} {%block content%} {%if user.is_authenticated %}
+{%extends 'base.html'%} {%block content%} 
 
-<table class="table table-hover table-bordered table-secondary table-striped">
+<table class="table table-hover table-bordered table-secondary table-striped">{%if user.is_authenticated and user.is_staff %}
   <thead class="table-secondary">
     <tr>
       <th scope="col">Title</th>
