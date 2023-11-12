@@ -13,4 +13,6 @@ urlpatterns = [
     path("add_snag/", views.add_snag, name="snags/add_snag"),
     path("update_snag/<int:pk>", views.update_snag, name="snags/update_snag"),
     path("search", views.search, name="search"),
+    path("snag_csv", views.snag_csv, name="snag_csv"),
+    path("search_csv", views.search_csv, name="search_csv"),
 ]

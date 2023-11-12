@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddSnagForm
+from django.http import HttpResponse
+import csv
 
 # Create your views here.
 
@@ -34,7 +36,7 @@ def index(request):
             messages.success(request, "Error ,please try again")
             return redirect("snags/home")
     else:
-        return render(request, "snags/home.html", {"snags": snags})
+        return render(request, "snags/snag_list.html", {"snags": snags})
 
 
 def logout_user(request):
@@ -128,12 +130,137 @@ def search(request):
             Q(address__icontains=searched)
             | Q(status__icontains=searched)
             | Q(site__icontains=searched)
+            | Q(booked_date__icontains=searched)
         )
         snags = Snag.objects.filter(multiple)
+
         return render(
             request,
             "search.html",
             {"searched": searched, "snags": snags},
         )
+
     else:
         return render(request, "search.html", {})
+
+
+def snag_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = "attachment; filename=snags.csv"
+
+    # Create csv writer
+    writer = csv.writer(response)
+
+    # Designate the model
+    snags = Snag.objects.all()
+
+    # Add Columns:
+    writer.writerow(
+        [
+            "Site",
+            "Address",
+            "Post Code",
+            "Plot Nr.",
+            "Ref. Nr.",
+            "First Name",
+            "Last Name",
+            "Phone Nr.",
+            "E mail",
+            "Details",
+            "Notes",
+            "Date",
+            "AM / PM",
+            "Status",
+            "Created at",
+        ]
+    )
+
+    # Loop through:
+    for snag in snags:
+        writer.writerow(
+            [
+                snag.site,
+                snag.address,
+                snag.post_code,
+                snag.plot_number,
+                snag.ref_number,
+                snag.first_name,
+                snag.last_name,
+                snag.phone_number,
+                snag.email,
+                snag.snag_details,
+                snag.notes,
+                snag.booked_date,
+                snag.am_pm,
+                snag.status,
+                snag.created_at,
+            ]
+        )
+
+    return response
+
+
+def search_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = "attachment; filename=search.csv"
+
+    if request.method == "POST":
+        searched = request.POST["searched"]
+        # snags = Snag.objects.filter(address__icontains=searched)
+        multiple = Q(
+            Q(address__icontains=searched)
+            | Q(status__icontains=searched)
+            | Q(site__icontains=searched)
+            | Q(booked_date__icontains=searched)
+        )
+
+        # Create csv writer
+        writer = csv.writer(response)
+
+        # Designate the model
+        snags = Snag.objects.filter(multiple)
+
+        # Add Columns:
+        writer.writerow(
+            [
+                "Site",
+                "Address",
+                "Post Code",
+                "Plot Nr.",
+                "Ref. Nr.",
+                "First Name",
+                "Last Name",
+                "Phone Nr.",
+                "E mail",
+                "Details",
+                "Notes",
+                "Date",
+                "AM / PM",
+                "Status",
+                "Created at",
+            ]
+        )
+
+        # Loop through:
+        for snag in snags:
+            writer.writerow(
+                [
+                    snag.site,
+                    snag.address,
+                    snag.post_code,
+                    snag.plot_number,
+                    snag.ref_number,
+                    snag.first_name,
+                    snag.last_name,
+                    snag.phone_number,
+                    snag.email,
+                    snag.snag_details,
+                    snag.notes,
+                    snag.booked_date,
+                    snag.am_pm,
+                    snag.status,
+                    snag.created_at,
+                ]
+            )
+
+        return response

@@ -159,4 +159,4 @@ class AddSnagForm(forms.ModelForm):
 
     class Meta:
         model = Snag
-        exclude = ("user",)
+        exclude = ("user", "status")
