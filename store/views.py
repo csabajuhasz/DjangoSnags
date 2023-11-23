@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import F
 from store.models import *
 from django.db.models import Q
@@ -21,7 +21,11 @@ def collection(request):
 
 def items_collection(request, pk):
     if request.user.is_authenticated:
-        collections = Collection.objects.get(id=pk).material_set.all()
+        # collections = Collection.objects.get(id=pk).material_set.all()
+        collections = get_object_or_404(
+            Collection,
+            id=pk,
+        ).material_set.all()
 
         # z = collections.material_set.all()
 
@@ -76,7 +80,11 @@ def add_material(request):
 
 def update_material(request, pk):
     if request.user.is_authenticated:
-        current_material = Material.objects.get(id=pk)
+        # current_material = Material.objects.get(id=pk)
+        current_material = get_object_or_404(
+            Material,
+            id=pk,
+        )
         form = AddMaterialForm(request.POST or None, instance=current_material)
         if form.is_valid():
             form.save()

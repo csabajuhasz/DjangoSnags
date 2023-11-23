@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Snag
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import SignUpForm, AddSnagForm
 from django.http import HttpResponse
 import csv
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -14,18 +15,28 @@ def core(request):
     return render(request, "core.html", {})
 
 
-def index(request):
-    snags = Snag.objects.all().order_by(
-        "-status",
-        "booked_date",
-        "am_pm",
-        "site",
+def snag_list(request):
+    p = Paginator(
+        Snag.objects.all().order_by(
+            "-status",
+            "booked_date",
+            "am_pm",
+            "site",
+        ),
+        5,
     )
 
+    page_number = request.GET.get("page")
+    snags = p.get_page(page_number)
+    return render(request, "snags/snag_list.html", {"snags": snags})
+
+
+def home(request):
     # Check to see if logged in
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
+
         # Authenticate
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -36,7 +47,7 @@ def index(request):
             messages.success(request, "Error ,please try again")
             return redirect("snags/home")
     else:
-        return render(request, "snags/snag_list.html", {"snags": snags})
+        return redirect("snags/snag_list")
 
 
 def logout_user(request):
@@ -67,7 +78,11 @@ def register_user(request):
 def customer_snag(request, pk):
     if request.user.is_authenticated:
         # Look Up Records
-        customer_snag = Snag.objects.get(id=pk)
+        # customer_snag = Snag.objects.get(id=pk)
+        customer_snag = get_object_or_404(
+            Snag,
+            id=pk,
+        )
         return render(request, "snags/customer.html", {"customer_snag": customer_snag})
     else:
         messages.success(request, "You Must Be Logged In To View That Page...")
@@ -76,7 +91,12 @@ def customer_snag(request, pk):
 
 def delete_snag(request, pk):
     if request.user.is_authenticated:
-        delete_it = Snag.objects.get(id=pk)
+        # delete_it = Snag.objects.get(id=pk)
+        delete_it = get_object_or_404(
+            Snag,
+            id=pk,
+        )
+
         delete_it.delete()
         messages.success(request, "You have deleted  succesfully")
         return redirect("snags/home")
@@ -202,7 +222,7 @@ def snag_csv(request):
 
 def search_csv(request):
     response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = "attachment; filename=search.csv"
+    response["Content-Disposition"] = "attachment; filename=searched_snag.csv"
 
     if request.method == "POST":
         searched = request.POST["searched"]

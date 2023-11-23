@@ -2,11 +2,33 @@
 <h1>Details for {{ searched }} :</h1>
 {%if user.is_authenticated and user.is_staff %}
 
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <form
+      class="d-flex"
+      method="POST"
+      action="{%url 'job_csv' %}"
+      role="search"
+    >
+      {% csrf_token %}
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search first name"
+        aria-label="Search"
+        name="searched"
+      />
+      <button class="btn btn-outline-success" type="submit">CSV</button>
+    </form>
+  </div>
+</nav>
+
 <br />
 {% endif %}
 <table class="table table-hover table-bordered table-secondary table-striped">
   <thead class="table-secondary">
     <tr>
+      <th scope="col">First Name</th>
       <th scope="col">Location</th>
       <th scope="col">Description</th>
       <th scope="col">Date</th>
@@ -16,7 +38,8 @@
     {% if jobs %} {%for job in jobs%}
 
     <tr>
-      <td>{{job}}</td>
+      <td>{{job.operatives__first_name}}</td>
+      <td>{{job.location}}</td>
       <td>{{job.description}}</td>
       <td>{{job.job_date}}</td>
     </tr>
@@ -26,5 +49,5 @@
 <br />
 
 {% endif %}{% else %}
-<h1>Hey You Forgot to Search</h1>
+<h1>For Fuck Sake <br />You forgot to type in to the field</h1>
 {% endif %} {% endblock %}

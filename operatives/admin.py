@@ -12,7 +12,8 @@ class DetailInline(admin.StackedInline):
 
 @admin.register(models.Operative)
 class OperativeAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name", "operative_created_at"]
+    list_display = ["first_name", "last_name", "rating", "operative_created_at"]
+    list_editable = ["rating"]
     list_per_page = 10
     search_fields = ["first_name__istartswith"]
     inlines = [DetailInline]

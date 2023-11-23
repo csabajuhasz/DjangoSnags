@@ -11,4 +11,5 @@ urlpatterns = [
     ),
     path("operatives/", views.job, name="operatives/detail"),
     path("search_job", views.search_job, name="operatives/search_job"),
+    path("job_csv", views.job_csv, name="job_csv"),
 ]

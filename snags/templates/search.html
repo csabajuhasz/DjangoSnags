@@ -1,5 +1,5 @@
 {%extends 'base.html'%} {%block content%} {%if searched%}
-<p>You searched for : " <strong>{{searched}}</strong>"</p>
+<p>Results for : " <strong>{{searched}}</strong>"</p>
 <br />
 
 <nav class="navbar bg-body-tertiary">
@@ -59,7 +59,11 @@
       <td>{{snag.am_pm}}</td>
     </tr>
 
-    {%endfor%}
+    {%endfor%}{% else %}
+    <h1>
+      Fucking Hell Mate <br />
+      <br />You foret to type in the search field <br />
+    </h1>
   </tbody>
 </table>
 
