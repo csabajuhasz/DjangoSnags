@@ -7,6 +7,10 @@ from .forms import SignUpForm, AddSnagForm
 from django.http import HttpResponse
 import csv
 from django.core.paginator import Paginator
+from django.conf import settings
+import datetime
+from django.template.loader import render_to_string
+import weasyprint
 
 # Create your views here.
 
@@ -220,67 +224,17 @@ def snag_csv(request):
     return response
 
 
-def search_csv(request):
-    response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = "attachment; filename=searched_snag.csv"
+def admin_snag_pdf(request, pk):
+    snag = get_object_or_404(
+        Snag,
+        id=pk,
+    )
 
-    if request.method == "POST":
-        searched = request.POST["searched"]
-        # snags = Snag.objects.filter(address__icontains=searched)
-        multiple = Q(
-            Q(address__icontains=searched)
-            | Q(status__icontains=searched)
-            | Q(site__icontains=searched)
-            | Q(booked_date__icontains=searched)
-        )
+    html = render_to_string("snags/pdf.html", {"snag": snag})
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f"filename={snag.address}.pdf"
+    weasyprint.HTML(string=html).write_pdf(
+        response,
+    )
 
-        # Create csv writer
-        writer = csv.writer(response)
-
-        # Designate the model
-        snags = Snag.objects.filter(multiple)
-
-        # Add Columns:
-        writer.writerow(
-            [
-                "Site",
-                "Address",
-                "Post Code",
-                "Plot Nr.",
-                "Ref. Nr.",
-                "First Name",
-                "Last Name",
-                "Phone Nr.",
-                "E mail",
-                "Details",
-                "Notes",
-                "Date",
-                "AM / PM",
-                "Status",
-                "Created at",
-            ]
-        )
-
-        # Loop through:
-        for snag in snags:
-            writer.writerow(
-                [
-                    snag.site,
-                    snag.address,
-                    snag.post_code,
-                    snag.plot_number,
-                    snag.ref_number,
-                    snag.first_name,
-                    snag.last_name,
-                    snag.phone_number,
-                    snag.email,
-                    snag.snag_details,
-                    snag.notes,
-                    snag.booked_date,
-                    snag.am_pm,
-                    snag.status,
-                    snag.created_at,
-                ]
-            )
-
-        return response
+    return response

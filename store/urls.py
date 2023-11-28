@@ -16,4 +16,5 @@ urlpatterns = [
         "update_material/<int:pk>", views.update_material, name="store/update_material"
     ),
     path("search_material", views.search_material, name="store/search_material"),
+    path("materials_csv", views.materials_csv, name="materials_csv"),
 ]

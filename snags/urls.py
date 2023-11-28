@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# app_name = "snags"
 
 urlpatterns = [
     path("", views.core, name="core"),
@@ -14,5 +15,5 @@ urlpatterns = [
     path("update_snag/<int:pk>", views.update_snag, name="snags/update_snag"),
     path("search", views.search, name="search"),
     path("snag_csv", views.snag_csv, name="snag_csv"),
-    path("search_csv", views.search_csv, name="search_csv"),
+    path("admin_snag_pdf/<int:pk>", views.admin_snag_pdf, name="snags/pdf"),
 ]

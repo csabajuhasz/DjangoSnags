@@ -1,0 +1,82 @@
+<html>
+  <div>
+    <body>
+      <h4>DEFECT RECTIFICATION DEPLOYMENT</h4>
+
+      <p>{{snag.created_at|date:"d M Y"}}</p>
+
+      <p>
+        Our REf : FNH {{snag.fnh_ref_number}}/Plot NO. {{snag.plot_number}} /
+        <strong>{{snag.ref_number}}</strong><br />
+
+        <i>
+          Please quote this reference on all crespondence in relation to this
+          matter</i
+        >
+      </p>
+      LCS001 <br />
+      LCS Roofing & Cladding Ld<br />
+      1 Lyric Suare<br />
+      Lyric House<br />
+      Hammersmith<br />
+      London<br />
+      <br />
+      <p>Dear Sir / Madam,</p>
+      <p>
+        <strong
+          >Re:, {{snag.address}}, {{snag.site}}, {{snag.post_code}}</strong
+        >
+        <br />
+        <b>Legal Comletition Date: {{snag.completition_date|date:"d M Y"}}</b>
+      </p>
+      <p>
+        <strong
+          >Contact Name: Mr {{snag.first_name}} {{snag.last_name}}, Tel. ,
+          Mobile. {{snag.phone_number}}, {{snag.email}}
+        </strong>
+      </p>
+      <p>
+        In accordance with our standard terms and conditions of employment, you
+        are <br />hereby instructed to cary out the following Customer Service
+        work to the above <br />property:-
+      </p>
+      <p>
+        <strong
+          >LCS : {{snag.snag_details}} <br />Please attend and recrify</strong
+        >
+      </p>
+      <p>
+        <strong
+          >Please contact the customer within 48 hours to book an appointment
+          unless it is an <br />
+          emergency.You must confirm your appointment to Customer Services
+          within 72 <br />
+          hours of this deployment notice. You must return the signed deployment
+          notice <br />
+          once completed.</strong
+        >
+      </p>
+      <p>
+        All works must be carried out within 14 days. If, after the above date,
+        the work has <br />
+        not been completed, or has been carried out to an unacceptable standard,
+        we shall <br />
+        immediately make alternative arrangements to deal with the work and
+        therefore <br />
+        there will be a reduction in your order value.
+      </p>
+      <p>Yours faithfully, <br /><br /><br /><b>Tracy Albert</b></p>
+      <br /><br />
+      <p>
+        FAIRVIEW CUSTOMER SERVICE DEPARTMENT <br />
+        <strong>We confirm the above works have been completed.</strong>
+      </p>
+      <br /><br /><br />
+      <p>Signed (Customer) ...................</p>
+      <br /><br /><br />
+      <p>Signed (Contractor) .................</p>
+      <br /><br /><br />
+      <p>Date : {{snag.booked_date|date:"d M Y"}}</p>
+    </body>
+  </div>
+</html>

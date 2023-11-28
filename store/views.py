@@ -4,6 +4,8 @@ from store.models import *
 from django.db.models import Q
 from django.contrib import messages
 from .forms import AddMaterialForm, AddCollectionForm
+import csv
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -114,3 +116,41 @@ def search_material(request):
         )
     else:
         return render(request, "search.html", {})
+
+
+def materials_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = "attachment; filename=materials.csv"
+
+    # Create csv writer
+    writer = csv.writer(response)
+
+    # Designate the model
+    materials = Material.objects.all()
+
+    # Add Columns:
+    writer.writerow(
+        [
+            "Title",
+            "Inventory",
+            "Description",
+            "Update.",
+            "Collection",
+            "Site",
+        ]
+    )
+
+    # Loop through:
+    for material in materials:
+        writer.writerow(
+            [
+                material.title,
+                material.inventory,
+                material.description,
+                material.update,
+                material.collection,
+                material.site,
+            ]
+        )
+
+    return response

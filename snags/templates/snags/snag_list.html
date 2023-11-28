@@ -64,7 +64,7 @@
   </tbody>
 </table>
 
-{% endif %} {%else%}
+{% endif %} {% include "pagination.html" with page=snags %}{%else%}
 
 <div class="col-md-6 offset-md-3">
   <h1>Login</h1>
@@ -99,4 +99,4 @@
   </form>
   <br />
 </div>
-{% endif %} {% include "pagination.html" with page=snags %} {% endblock %}
+{% endif %} {% endblock %}

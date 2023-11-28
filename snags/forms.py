@@ -69,7 +69,7 @@ class AddSnagForm(forms.ModelForm):
     site = forms.CharField(
         required=False,
         widget=forms.widgets.TextInput(
-            attrs={"placeholder": "Site", "class": "form-control"}
+            attrs={"placeholder": "Borough", "class": "form-control"}
         ),
         label="",
     )
@@ -155,6 +155,25 @@ class AddSnagForm(forms.ModelForm):
             }
         ),
         label="Booking Date",
+    )
+
+    fnh_ref_number = forms.CharField(
+        required=False,
+        widget=forms.widgets.TextInput(
+            attrs={"placeholder": "FNH. Ref. Number", "class": "form-control"}
+        ),
+        label="",
+    )
+
+    completition_date = forms.DateField(
+        required=False,
+        widget=forms.widgets.DateInput(
+            attrs={
+                "placeholder": "Year -Month -Day",
+                "class": "form-control",
+            }
+        ),
+        label="Completition date",
     )
 
     class Meta:
