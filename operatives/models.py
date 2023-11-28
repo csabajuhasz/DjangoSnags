@@ -3,22 +3,22 @@ from django.utils import timezone
 
 
 class Operative(models.Model):
-    rating_one = "Poor"
-    rating_two = "Room for Improvement"
-    rating_tree = "Good"
-    rating_four = "Dog's bollocks"
+    one = "Poor"
+    two = "Room for Improvement"
+    tree = "Good"
+    four = "Dog's bollocks"
 
     rating_choices = [
-        (rating_one, "Poor"),
-        (rating_two, "Room for Improvement"),
-        (rating_tree, "Good"),
-        (rating_four, "Dog's bollocks"),
+        (one, "Poor"),
+        (two, "Room for Improvement"),
+        (tree, "Good"),
+        (four, "Dog's bollocks"),
     ]
 
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     operative_created_at = models.DateField(auto_now_add=True)
-    rating = models.CharField(max_length=21, choices=rating_choices, default=rating_one)
+    rating = models.CharField(max_length=4, choices=rating_choices, default=tree)
 
     def __str__(self):
         return f" {self.first_name} {self.last_name}"
