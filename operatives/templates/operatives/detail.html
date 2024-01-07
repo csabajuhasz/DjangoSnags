@@ -8,7 +8,7 @@
   {%if user.is_authenticated and user.is_staff %}
   <div class="container-fluid">
     <form
-      class="d-flex"
+      class="container-fluid justify-content-start"
       method="POST"
       action="{%url 'operatives/search_job'%}"
       role="search"
@@ -20,7 +20,8 @@
         placeholder="Search by name"
         aria-label="Search"
         name="searched"
-      />
+      />From: <input type="date" name="fromdate" required=" False" /> To:
+      <input type="date" name="todate" required=" False" />
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>

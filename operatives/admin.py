@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericStackedInline
 
+from django.http import HttpResponse
+
 # from .models import Operative, Detail, Job
 from . import models
 
@@ -21,7 +23,8 @@ class OperativeAdmin(admin.ModelAdmin):
 
 @admin.register(models.Detail)
 class DetailAdmin(admin.ModelAdmin):
-    list_display = ["operative", "phone_number", "email", "trade"]
+    list_display = ["operative", "phone_number", "email", "trade", "wage"]
+    list_editable = ["wage"]
     list_per_page = 10
     search_fields = ["trade__istartswith"]
     list_filter = ["trade"]
@@ -29,7 +32,8 @@ class DetailAdmin(admin.ModelAdmin):
 
 @admin.register(models.Job)
 class JobAdmin(admin.ModelAdmin):
+    actions = ["sum"]
     list_display = ["location", "description", "job_date"]
     list_per_page = 10
-    search_fields = ["location__istartswith"]
+    search_fields = ["location__istartswith", "operatives__first_name__istartswith"]
     list_filter = ["location", "job_date"]

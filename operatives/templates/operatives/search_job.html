@@ -25,6 +25,7 @@
 
 <br />
 {% endif %}
+
 <table class="table table-hover table-bordered table-secondary table-striped">
   <thead class="table-secondary">
     <tr>
@@ -32,6 +33,7 @@
       <th scope="col">Location</th>
       <th scope="col">Description</th>
       <th scope="col">Date</th>
+      <th scope="col">Wage</th>
     </tr>
   </thead>
   <tbody>
@@ -42,12 +44,38 @@
       <td>{{job.location}}</td>
       <td>{{job.description}}</td>
       <td>{{job.job_date}}</td>
+      <td>{{job.operatives__detail__wage }}</td>
     </tr>
     {%endfor%}
   </tbody>
 </table>
+
+<br />
+<h1>{{searched}} earnings in detail:</h1>
 <br />
 
+<table class="table table-hover table-bordered table-secondary table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">Total Amount</th>
+      <th scope="col">Retention 2.5%</th>
+      <th scope="col">Amount Earned</th>
+      <th scope="col">Tax 20%</th>
+      <th scope="col">Payable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{result}}</td>
+      <td>{{retention}}</td>
+      <td>{{before_tax}}</td>
+      <td>{{tax}}</td>
+      <td>{{amount_inhand }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
 {% endif %}{% else %}
 <h1>For Fuck Sake <br />You forgot to type in to the field</h1>
 {% endif %} {% endblock %}

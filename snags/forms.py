@@ -150,7 +150,7 @@ class AddSnagForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.DateInput(
             attrs={
-                "placeholder": "Year -Month -Day",
+                "placeholder": "YYYY -MM -dd",
                 "class": "form-control",
             }
         ),
@@ -169,7 +169,7 @@ class AddSnagForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.DateInput(
             attrs={
-                "placeholder": "Year -Month -Day",
+                "placeholder": "YYYY -MM -dd",
                 "class": "form-control",
             }
         ),
